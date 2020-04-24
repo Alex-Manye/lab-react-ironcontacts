@@ -19,8 +19,6 @@ class App extends Component {
   } 
 
 
-
-
 deleteCelebrity = celebrityName => {
   let newCelebrities = [...this.state.celebrities].filter((celebrity) => {
     if (celebrity.name !== celebrityName) {
@@ -33,8 +31,41 @@ deleteCelebrity = celebrityName => {
   })
 }
 
+sortByPopularity = () =>{
+  let sortedList = this.state.celebrities.sort((a, b) => {
+    if (this.state.sortedPopularity){
+    return a.popularity-b.popularity}
+    else{
+      return b.popularity - a.popularity
+    } 
+  });
 
 
+/*  2 way of sort by popularity-> this one only sort in descending order
+ this.setState({
+    celebrities: sortedList
+  }) */
+
+//This second setState allows to sort in asc and in desc order.  
+this.setState({
+  contacts: sortedList, 
+  sortedPopularity: !this.state.sortedPopularity 
+  });
+}
+
+sortByName = () => {
+  let sortedListByName = this.state.celebrities.sort((a, b) => {
+    if (this.state.sortedbyName){
+    return a.name.localeCompare(b.name)
+    } else {
+      return b.name.localeCompare(a.name);
+    } 
+  });
+  this.setState({
+    contacts: sortedListByName, 
+    sortedbyName: !this.state.sortedbyName
+  });
+};
 
 
 
